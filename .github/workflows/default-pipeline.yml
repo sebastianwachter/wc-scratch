@@ -34,7 +34,10 @@ jobs:
       - uses: "ibiqlik/action-yamllint@v3"
 
   test-unit:
-    needs: ["static-code-analysis-lint", "static-code-analysis-typescript"]
+    needs: 
+      - "static-code-analysis-lint"
+      - "static-code-analysis-typescript"
+      - "static-code-analysis-yamllint"
     runs-on: "ubuntu-latest"
     name: "Unit Tests"
     steps:
