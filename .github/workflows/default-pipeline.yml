@@ -34,7 +34,7 @@ jobs:
       - uses: "ibiqlik/action-yamllint@v3"
 
   test-unit:
-    needs: 
+    needs:
       - "static-code-analysis-lint"
       - "static-code-analysis-typescript"
       - "static-code-analysis-yamllint"
