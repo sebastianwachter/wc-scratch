@@ -1,0 +1,14 @@
+* {
+  user-select: none;
+}
+
+div {
+  position: relative;
+  display: flex;
+}
+
+canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
