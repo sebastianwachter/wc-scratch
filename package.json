@@ -1,5 +1,6 @@
 {
   "name": "wc-scratch",
+  "description": "A fun scratch card native web component without any dependencies.",
   "version": "0.2.0",
   "type": "module",
   "main": "./dist/wc-scratch.umd.cjs",
@@ -13,6 +14,14 @@
   "files": [
     "./dist/**/*"
   ],
+  "license": "MIT",
+  "author": {
+    "name": "Sebastian Wachter",
+    "email": "sebastian.wachter@online.de"
+  },
+  "bugs": {
+    "url": "https://github.com/sebastianwachter/wc-scratch/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
