@@ -28,7 +28,7 @@ Now you can use the component in your markup:
 
 ```html
 <wc-scratch>
-  <h1 style="margin:0">Scratch me free!</h1>
+  <h1 style="margin: 0">Scratch me free!</h1>
 </wc-scratch>
 ```
 
