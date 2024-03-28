@@ -143,6 +143,22 @@ describe('wc-scratch', () => {
     expect(comp.isDrawing).toEqual(false)
   })
 
+  it.each([0, 1, 2, 3])('generates an array with values at nth: %s index of given array', async (nth) => {
+    // Arrange
+    document.body.innerHTML = '<wc-scratch><p>Scratch!</p></wc-scratch>'
+    const comp = document.querySelector('wc-scratch')
+    if (comp === null) return
+    const sourceArray = [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
+    const quadrupleAmount = sourceArray.length / 4
+
+    // Act
+    const resultArray = comp.getArrayWithValueOfQuadrupleAtNthIndex(sourceArray, nth)
+
+    // Assert
+    expect(resultArray.length).toEqual(quadrupleAmount)
+    expect(resultArray.filter(num => num === nth + 1).length).toEqual(quadrupleAmount)
+  })
+
   it('calculates its cleared area', async () => {
     // Arrange
     document.body.innerHTML = `
@@ -154,7 +170,11 @@ describe('wc-scratch', () => {
     if (comp.context === null) return
 
     const imageDataSpy = vi.spyOn(comp.context, 'getImageData')
-    let imageData = { data: new Uint8ClampedArray(900).fill(255) } as unknown as ImageData
+    const allFilledWithBlack = new Array(1200).fill(0)
+    for (let i = 3; i < allFilledWithBlack.length; i += 4) {
+      allFilledWithBlack.splice(i, 1, 255)
+    }
+    let imageData = { data: allFilledWithBlack } as unknown as ImageData
     imageDataSpy.mockImplementationOnce(() => (imageData))
 
     vi.spyOn(comp, 'emitEvent')
@@ -169,10 +189,12 @@ describe('wc-scratch', () => {
     expect(res).toEqual(0)
 
     // Arrange
-    const filledArray = new Array(450).fill(255)
-    const clearedArray = new Array(450).fill(0)
-    const combinedArray = [...filledArray, ...clearedArray]
-    imageData = { data: new Uint8ClampedArray(combinedArray) } as unknown as ImageData
+    const halfBlackHalfCleared = new Array(1200).fill(0)
+    for (let i = 3; i < allFilledWithBlack.length; i += 4) {
+      if (i > 601) return
+      halfBlackHalfCleared.splice(i, 1, 255)
+    }
+    imageData = { data: halfBlackHalfCleared } as unknown as ImageData
     imageDataSpy.mockImplementationOnce(() => (imageData))
 
     // Act
@@ -183,7 +205,8 @@ describe('wc-scratch', () => {
     expect(res).toEqual(50)
 
     // Arrange
-    imageData = { data: new Uint8ClampedArray(900).fill(0) } as unknown as ImageData
+    const allCleared = new Array(1200).fill(0)
+    imageData = { data: allCleared } as unknown as ImageData
     imageDataSpy.mockImplementationOnce(() => (imageData))
 
     // Act
