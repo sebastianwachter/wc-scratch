@@ -257,15 +257,34 @@ export class Scratch extends HTMLElement {
   calcAreaCleared (): void {
     if (this.context === null) return
     const { width, height } = this.context.canvas
-    const { data, data: { length } } = this.context.getImageData(0, 0, width, height)
-    const chunkSize = 150
-    const totalChunks = length / chunkSize
+    const { data } = this.context.getImageData(0, 0, width, height)
+    /*
+     * Data is an array that contains quadrupels of RGBA values -> for the cleared area calculation we are
+     * only interestesd in the alpha channel (0 = transparent / 255 = fully visible) of this quadrupel.
+     */
+    const onlyAlphaChannel = this.getArrayWithValueOfQuadrupleAtNthIndex(data, 3)
+    const chunkSize = 146
+    const totalChunks = onlyAlphaChannel.length / chunkSize
     let clearedChunks = 0
-    for (let i = clearedChunks; i < length; i += chunkSize) {
-      if (Math.ceil(data[i]) === 0) clearedChunks += 1
+    for (let i = clearedChunks; i < onlyAlphaChannel.length; i += chunkSize) {
+      if (onlyAlphaChannel[i] === 0) clearedChunks += 1
     }
     const percentage = Math.round((clearedChunks / totalChunks) * 100)
     this.emitEvent(ScratchEvents.PERCENTAGE_UPDATE, percentage)
+  }
+
+  /**
+   * Takes an Uint8ClampedArray and a number -> returns a new array that consists of every nth entry
+   * in the given array.
+   * @param {Uint8ClampedArray} source The source Uint8ClampedArray
+   * @param {number} n The nth index as its a quadruple only numbers 0, 1, 2 and 3 are allowed
+   */
+  getArrayWithValueOfQuadrupleAtNthIndex (source: Uint8ClampedArray | number[], n: number): number[] {
+    const arr = []
+    for (let i = n; i < source.length; i = i + 4) {
+      arr.push(source[i])
+    }
+    return arr
   }
 
   /**
