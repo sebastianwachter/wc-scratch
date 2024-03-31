@@ -270,4 +270,19 @@ describe('wc-scratch', () => {
     expect(calcSpy).toBeCalledTimes(param ? 1 : 0)
     if (param) expect(calcSpy).toHaveBeenCalledWith(ScratchEvents.PERCENTAGE_UPDATE, 100)
   })
+
+  it.each([false, true])('sets the scratch source image element when set: %s', async (param) => {
+    // Arrange
+    document.body.innerHTML = param
+      ? '<wc-scratch percentage-update><p>Scratch!</p><img slot="scratch-source" src="any" /></wc-scratch>'
+      : '<wc-scratch><p>Scratch!</p></wc-scratch>'
+    const comp = document.querySelector('wc-scratch') as Scratch
+
+    // Act & Assert
+    if (param) {
+      expect(comp.scratchSourceImage).toBeInstanceOf(HTMLImageElement)
+    } else {
+      expect(comp.scratchSourceImage).toBeNull()
+    }
+  })
 })

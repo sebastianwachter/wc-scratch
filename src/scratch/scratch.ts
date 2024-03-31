@@ -1,7 +1,7 @@
 import styles from './style.css?raw'
 
 const template = document.createElement('template')
-template.innerHTML = `<style>${styles}</style><div><slot></slot><canvas></canvas></div>`
+template.innerHTML = `<style>${styles}</style><div><slot></slot><slot name="scratch-source"></slot><canvas></canvas></div>`
 
 enum ScratchAttributes {
   BRUSH_SIZE = 'brush-size',
@@ -176,6 +176,16 @@ export class Scratch extends HTMLElement {
   }
 
   /**
+   * Gets the scratch source image data.
+   * @returns {HTMLImageElement | null} returns HTMLImageElement if the scratch source is set using an <img> else returns null.
+   */
+  get scratchSourceImage (): HTMLImageElement | null {
+    const scratchSource = this.querySelector('img[slot="scratch-source"]') as HTMLImageElement
+    if (scratchSource === null) return null
+    return scratchSource
+  }
+
+  /**
    * Handles an event type agnostic input start event.
    * @param {Vector} { x, y } The x and y coordinates where the start event is triggered.
    * @returns {void}
@@ -207,16 +217,36 @@ export class Scratch extends HTMLElement {
   }
 
   /**
-   * Fills the canvas with the defined color.
+   * Fills the canvas with the defined color or scratch-source image.
    * @returns {void}
    */
   fillArea (): void {
     if (this.context === null) return
-    const { width, height } = this.context.canvas
+    if (this.scratchSourceImage === null) {
+      const { width, height } = this.context.canvas
+      this.context.fillStyle = this.scratchColor
+      this.context.fillRect(0, 0, width, height)
+    } else {
+      // I don't know how to write a test for this case :()
+      const context = this.context
+      const scratchSourceImage = this.scratchSourceImage
+      if (this.scratchSourceImage.complete) {
+        this.handleScratchSourceImageLoad(context, scratchSourceImage)
+        return
+      }
+      this.scratchSourceImage.addEventListener('load', () => this.handleScratchSourceImageLoad(context, scratchSourceImage))
+    }
     this.context.globalCompositeOperation = 'source-over'
-    this.context.fillStyle = this.scratchColor
-    this.context.fillRect(0, 0, width, height)
     if (this.percentageUpdate) this.emitEvent(ScratchEvents.PERCENTAGE_UPDATE, 0)
+  }
+
+  /**
+   * Handles the on load of the scratch source image event and draws that image
+   * ontop of the canvas.
+   * @returns {void}
+   */
+  handleScratchSourceImageLoad (context: CanvasRenderingContext2D, scratchSourceImage: HTMLImageElement): void {
+    context.drawImage(scratchSourceImage, 0, 0)
   }
 
   /**
