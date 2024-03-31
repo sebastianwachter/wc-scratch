@@ -1,7 +1,7 @@
 {
   "name": "wc-scratch",
   "description": "A fun scratch card native web component without any dependencies.",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "type": "module",
   "main": "./dist/wc-scratch.umd.cjs",
   "module": "./dist/wc-scratch.js",
