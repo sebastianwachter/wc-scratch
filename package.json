@@ -39,7 +39,7 @@
     "canvas": "^2.11.2",
     "jsdom": "^24.1.1",
     "ts-standard": "^12.0.2",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "vite": "^5.3.4",
     "vite-plugin-dts": "^3.9.1",
     "vitest": "^2.0.1"
