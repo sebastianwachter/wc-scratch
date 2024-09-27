@@ -34,7 +34,7 @@
     "test:unit:coverage": "vitest run --coverage"
   },
   "devDependencies": {
-    "@types/node": "^22.7.2",
+    "@types/node": "^22.7.3",
     "@vitest/coverage-v8": "^2.1.1",
     "canvas": "^2.11.2",
     "jsdom": "^25.0.1",
