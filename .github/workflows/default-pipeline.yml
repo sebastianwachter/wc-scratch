@@ -7,7 +7,7 @@ jobs:
     name: "Static Code Analysis - Lint Standard"
     steps:
       - uses: "actions/checkout@v5"
-      - uses: "actions/setup-node@v5"
+      - uses: "actions/setup-node@v6"
         with:
           node-version: 20
           cache: "npm"
@@ -19,7 +19,7 @@ jobs:
     name: "Static Code Analysis - Typescript"
     steps:
       - uses: "actions/checkout@v5"
-      - uses: "actions/setup-node@v5"
+      - uses: "actions/setup-node@v6"
         with:
           node-version: 20
           cache: "npm"
@@ -42,7 +42,7 @@ jobs:
     name: "Unit Tests"
     steps:
       - uses: "actions/checkout@v5"
-      - uses: "actions/setup-node@v5"
+      - uses: "actions/setup-node@v6"
         with:
           node-version: 20
           cache: "npm"
@@ -60,7 +60,7 @@ jobs:
       - uses: "actions/checkout@v5"
         with:
           ref: "main"
-      - uses: "actions/setup-node@v5"
+      - uses: "actions/setup-node@v6"
         with:
           node-version: 20
           cache: "npm"
