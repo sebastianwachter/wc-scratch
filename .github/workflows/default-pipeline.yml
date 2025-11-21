@@ -6,7 +6,7 @@ jobs:
     runs-on: "ubuntu-latest"
     name: "Static Code Analysis - Lint Standard"
     steps:
-      - uses: "actions/checkout@v5"
+      - uses: "actions/checkout@v6"
       - uses: "actions/setup-node@v6"
         with:
           node-version: 20
@@ -18,7 +18,7 @@ jobs:
     runs-on: "ubuntu-latest"
     name: "Static Code Analysis - Typescript"
     steps:
-      - uses: "actions/checkout@v5"
+      - uses: "actions/checkout@v6"
       - uses: "actions/setup-node@v6"
         with:
           node-version: 20
@@ -30,7 +30,7 @@ jobs:
     runs-on: "ubuntu-latest"
     name: "Static Code Analysis - yamllint"
     steps:
-      - uses: "actions/checkout@v5"
+      - uses: "actions/checkout@v6"
       - uses: "ibiqlik/action-yamllint@v3"
 
   test-unit:
@@ -41,7 +41,7 @@ jobs:
     runs-on: "ubuntu-latest"
     name: "Unit Tests"
     steps:
-      - uses: "actions/checkout@v5"
+      - uses: "actions/checkout@v6"
       - uses: "actions/setup-node@v6"
         with:
           node-version: 20
@@ -57,7 +57,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/') # yamllint disable-line rule:quoted-strings
     name: "Publish to NPM"
     steps:
-      - uses: "actions/checkout@v5"
+      - uses: "actions/checkout@v6"
         with:
           ref: "main"
       - uses: "actions/setup-node@v6"
