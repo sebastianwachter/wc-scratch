@@ -9,7 +9,7 @@ jobs:
       - uses: "actions/checkout@v6"
       - uses: "actions/setup-node@v6"
         with:
-          node-version: 20
+          node-version: 24
           cache: "npm"
       - run: "npm ci"
       - run: "npm run lint:standard"
@@ -21,7 +21,7 @@ jobs:
       - uses: "actions/checkout@v6"
       - uses: "actions/setup-node@v6"
         with:
-          node-version: 20
+          node-version: 24
           cache: "npm"
       - run: "npm ci"
       - run: "npm run lint:typescript"
@@ -44,7 +44,7 @@ jobs:
       - uses: "actions/checkout@v6"
       - uses: "actions/setup-node@v6"
         with:
-          node-version: 20
+          node-version: 24
           cache: "npm"
       - run: "npm ci"
       - run: "npm run test:unit:coverage"
@@ -62,7 +62,7 @@ jobs:
           ref: "main"
       - uses: "actions/setup-node@v6"
         with:
-          node-version: 20
+          node-version: 24
           cache: "npm"
           registry-url: "https://registry.npmjs.org/"
       - run: "npm ci"
