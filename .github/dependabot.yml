@@ -13,10 +13,10 @@ updates:
       interval: "daily"
     versioning-strategy: "increase"
     groups:
-      - vitest:
-          patterns:
-            - "vitest"
-            - "@vitest/coverage-v8"
+      vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/coverage-v8"
 
   - commit-message:
       include: "scope"
@@ -29,7 +29,7 @@ updates:
     schedule:
       interval: "daily"
     groups:
-      - vitest:
-          patterns:
-            - "vitest"
-            - "@vitest/coverage-v8"
+      vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/coverage-v8"
