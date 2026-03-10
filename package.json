@@ -37,7 +37,7 @@
     "minimatch": "10.2.4"
   },
   "devDependencies": {
-    "@types/node": "25.3.5",
+    "@types/node": "25.4.0",
     "@vitest/coverage-v8": "4.0.18",
     "canvas": "3.2.1",
     "eslint": "9.39.2",
