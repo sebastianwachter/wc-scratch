@@ -34,6 +34,7 @@
     "test:unit:coverage": "vitest run --coverage"
   },
   "overrides": {
+    "flatted": "3.4.2",
     "minimatch": "10.2.4"
   },
   "devDependencies": {
