@@ -41,7 +41,7 @@
     "@types/node": "25.6.2",
     "@vitest/coverage-v8": "4.1.6",
     "canvas": "3.2.3",
-    "eslint": "9.39.2",
+    "eslint": "10.3.0",
     "jsdom": "29.1.1",
     "neostandard": "0.13.0",
     "typescript": "5.9.3",
